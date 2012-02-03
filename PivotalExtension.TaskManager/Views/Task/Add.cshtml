@@ -1,8 +1,7 @@
 ﻿@model PivotalExtension.TaskManager.Models.TaskViewModel
-@using(Html.BeginForm ("AddTask", "Stories", FormMethod.Post, new { @class = "async-form" })) {
-    <a href="#" class="facebox-cancel"><img src="../../Content/facebox/closelabel.gif" alt="Cancel" /></a>
+@using(Html.BeginForm ("AddTask", "Stories", FormMethod.Post, new { @class = "async-form", name="addTaskForm" })) {
     @Html.ValidationSummary(true)
-    <fieldset>
+    <fieldset style="position:relative;padding-bottom:20px">
         <legend>Add Task:</legend>
         @Html.HiddenFor(model => model.ProjectId)
         @Html.HiddenFor(model => model.StoryId, new { name = "storyId" })
@@ -14,8 +13,9 @@
             <label>Initials:</label>
             @Html.TextBox("initials")
         </p>
-        <p>
-            <input type="submit" value="Save" />
-        </p>
+        <div class="card-actions" style="bottom:-20px;right:40px;">
+            <a href="#" class="facebox-save link-button green">Save</a>
+            <a href="#" class="facebox-cancel link-button red">Cancel</a>
+        </div>
     </fieldset>
 }

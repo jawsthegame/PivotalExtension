@@ -5,15 +5,18 @@
     <div class="estimate">@Model.GetEstimate()</div>
     <h3>@Model.GetHeader()</h3>
     <p>@Model.Story.Name</p>
+    <div class="card-actions">
     @{
        if(Model.AdvanceAction() == "start") {
-         <button class="btn" onclick="StartStory('@Model.FormattedId');return false;">Start Story</button>
+         <a href="#" class="link-button green" onclick="StartStory('@Model.FormattedId');return false;">Start Story</a>
        }
 
-       if (Model.AdvanceAction() == "finish") {
-        <button class="btn" onclick="FinishStory('@Model.FormattedId');return false;">Finish Story</button>
-        @Html.ActionLink("Add task", "Add", "Task", new { projectId = @Model.Story.ProjectId, storyId = @Model.Story.Id }, new { @class = "facebox btn success", rel=@Model.FormattedId })
+       if (Model.AdvanceAction() == "finish")
+       {
+        <a href="#" class="link-button" onclick="FinishStory('@Model.FormattedId');return false;">Finish Story</a>
+        @Html.ActionLink("Add task", "Add", "Task", new { projectId = @Model.Story.ProjectId, storyId = @Model.Story.Id }, new { @class = "facebox link-button green", rel = @Model.FormattedId })
        }
     }
+    </div>
 </div>
     

@@ -23,7 +23,10 @@ function RemoveTask(id) {
         url: '/Stories/DeleteTask',
         data: 'projectId=' + items[0] + '&storyId=' + items[1] + '&taskId=' + items[2],
        success: function (html) {
-           $('#' + items[0] + '-' + items[1]).replaceWith(html);
+           var $toRefresh = $('#' + items[0] + '-' + items[1]);
+           $toRefresh.unbind()
+            .replaceWith(html);
+            BindFaceboxLinks($toRefresh);
         }
     });
 }
@@ -86,31 +89,39 @@ function Toggle(elem, selector) {
     });
 }
 
-//facebox stuff
-//requires jquery.form.js and facebox
-var updateTargetId;
 
-function BindFaceboxLinks(unbind) {
-    //$.live() doesn't work w/ facebox, need to re-bind when content is reloaded
-    if (unbind) {
-        $('a.facebox').unbind();
-    }
-    $('a.facebox').bind('click', function () {
-        updateTargetId = this.rel;
-    }).facebox();
+function BindFaceboxLinks($toBox) {
+    //facebox stuff
+    //requires jquery.form.js and facebox
+    var $updateTarget;
+
+    $toBox = $toBox || $('body');
+    $toBox
+        .find('a.facebox')
+        .click(function () {
+            $updateTarget = $('#' + this.rel);
+        })
+        .facebox();
 
     //on reveal, need to bind new async forms and cancellation links
-    $(document).bind('reveal.facebox', function () {
-        $('.async-form').ajaxForm(function (responseText) {
-            $('#' + updateTargetId).replaceWith(responseText);
+    $(document).bind('reveal.facebox', function (a, b) {
+        $('.async-form')
+            .ajaxForm(function (responseText) {
+                $updateTarget
+                    .unbind()
+                    .replaceWith(responseText);
+                $.facebox.close();
+                BindFaceboxLinks($updateTarget);
+                $updateTarget = null;
+            })
+        .find('.facebox-save').bind('click', function () {
+            $(this).parent().submit();
+            return false;
+        })
+        .end()
+        .find('.facebox-cancel').bind('click', function () {
             $.facebox.close();
-            BindFaceboxLinks(true);
-            updateTargetId = null;
-        });
-
-        $('.facebox-cancel').bind('click', function () {
-            $.facebox.close();
-            updateTargetId = null;
+            $updateTarget = null;
             return false;
         });
     });

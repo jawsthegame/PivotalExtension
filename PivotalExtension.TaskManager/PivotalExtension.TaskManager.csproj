@@ -84,7 +84,6 @@
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ActivityViewModel.cs" />
-    <Compile Include="Models\ProjectStoryViewModel.cs" />
     <Compile Include="Models\ProjectViewModel.cs" />
     <Compile Include="Models\StoryViewModel.cs" />
     <Compile Include="Models\StoryRowViewModel.cs" />
@@ -130,7 +129,6 @@
     <Content Include="Content\green-index-card.png" />
     <Content Include="Content\grey.png" />
     <Content Include="Content\HONDURAN_ROSEWOOD.jpg" />
-    <Content Include="Content\js\bootstrap-dropdown.js" />
     <Content Include="Content\js\jquery-1.5.min.js" />
     <Content Include="Content\js\jquery-ui-1.8.17.custom.min.js" />
     <Content Include="Content\js\jquery.form.js" />
@@ -218,9 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Task\Add.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\StoryNavigationControl.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

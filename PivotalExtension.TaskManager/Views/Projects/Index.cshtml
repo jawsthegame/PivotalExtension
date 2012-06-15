@@ -6,7 +6,42 @@
 }
 
 <h2>My Projects</h2>
+@*<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            IterationLength
+        </th>
+        <th>Recent Activities</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>*@
 
 @foreach (var item in Model) {
     @Html.Partial("ProjectControl", new ProjectViewModel(item));
+    @*<tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IterationLength)
+        </td>
+        <td>
+            @Html.ActionLink("Activities", "RecentActivities", new { projectId = item.Id }) 
+        </td>
+        <td>
+            @Html.ActionLink("Current Iteration Tasks By Story", "CurrentIteration", "Stories", new { projectId = item.Id }, null)
+        </td>
+        <td>
+            @Html.ActionLink("Backlog Tasks By Story", "BackLogStories", "Stories", new { projectId = item.Id }, null)
+        </td>
+        <td>
+            @Html.ActionLink("Icebox Tasks By Story", "IceboxStories", "Stories", new { projectId = item.Id }, null)
+        </td>
+    </tr>*@
 }
+
+@*</table>*@

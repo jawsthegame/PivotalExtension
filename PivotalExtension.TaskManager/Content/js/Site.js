@@ -41,7 +41,7 @@ function bindUIEvents(rootSelector) {
     $(rootSelector + 'a.facebox').bind('click', function () {
         updateTargetId = this.rel;
     }).facebox();
-    
+
     if (!rootDefined) { //assume that presence of root selector means document events already bound
         $(document).bind('reveal.facebox', function () {
             $('.async-form').ajaxForm(function (html) {

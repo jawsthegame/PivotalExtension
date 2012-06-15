@@ -1,4 +1,4 @@
-﻿@model PivotalExtension.TaskManager.Models.ProjectStoryViewModel
+﻿@model IEnumerable<PivotalTrackerDotNet.Domain.Story>
 @{
     ViewBag.Title = "Current Iteration";
 }
@@ -8,7 +8,6 @@
     <a href="#" onclick="SignUpForTask(); return false;">Sign Up For Selected</a> 
     <a href="#" onclick="RefreshStories(); return false;">Refresh</a>
 </div>
-@Html.Partial("StoryNavigationControl", @Model.ProjectId)
 }
 
 <p>
@@ -18,7 +17,7 @@
 </p>
 
 <table class="story-table">
-    @foreach (var story in Model.Stories) {
+    @foreach (var story in Model) {
         @Html.Partial("StoryRow", new PivotalExtension.TaskManager.Models.StoryRowViewModel(story))
     }
 </table>
